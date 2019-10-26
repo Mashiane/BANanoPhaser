@@ -1,0 +1,18 @@
+Reading B4J INI in C:\Users\anelembanga\AppData\Roaming\Anywhere Software\B4J to find Additional Libraries folder...
+Found Additional Libraries folder: C:\Users\anelembanga\Documents\MEGA\MyApps\b4j\Libraries
+WARNING: ServiceWorkers do NOT work unless running on a real webserver (ONLY on real https:// domains and http://localhost!)
+         They will also not work in old browsers
+Building C:\laragon\www\bananophaser\scripts\app1572112730530.js
+Loading library: C:\Users\anelembanga\Documents\MEGA\MyApps\b4j\Libraries\bananopostprocessor.xml
+Library: C:\Users\anelembanga\Documents\MEGA\MyApps\b4j\Libraries\bananopostprocessor.xml is not a BANano library!
+Copying CSS files to WebApp assets...
+Copying Javascript files to WebApp assets...
+Building C:\laragon\www\bananophaser\index.html
+ 
+
+The total size of your local CSS and JS files is 1.8MB and another 0.0MB in other assets.
+It is very important to only load the JS and CSS files from components that you actually use in your website/webapp!
+ 
+
+If you are using public frameworks (like jQuery, Bootstrap, etc...), consider using their CDN so the browser can use already buffered versions.
+Done!
