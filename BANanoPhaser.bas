@@ -31,11 +31,13 @@ Sub Class_Globals
 	Public const ScaleCenterCENTER_BOTH As Int = 1
 	Public const ScaleCenterCENTER_HORIZONTALLY As Int = 2
 	Public const ScaleCenterCENTER_VERTICALLY As Int = 3
+
 End Sub
 
 'Initializes the phaser object
 Public Sub Initialize()
 	Phaser.Initialize("Phaser")
+	
 	'
 	mconfig = CreateMap()
 	mphysics = CreateMap()
@@ -48,6 +50,15 @@ Public Sub Initialize()
 	mconfig.Put("scene", mscene)
 End Sub
 
+Sub GetWindowInnerWidth As Double
+	Dim iw As Double = BANano.Window.InnerWidth
+	Return iw
+End Sub
+
+Sub GetWindowInnerHeight As Double
+	Dim ih As Double = BANano.Window.InnerHeight
+	Return ih
+End Sub
 
 Sub SetScaleMode(scaleMode As Int)
 	mscale.Put("mode", scaleMode)
@@ -56,6 +67,8 @@ End Sub
 Sub SetScaleAutoCenter(autoCenter As Int)
 	mscale.Put("autoCenter", autoCenter)
 End Sub
+
+
 
 Sub SetBackgroundColor(colour As String)
 	mconfig.Put("backgroundColor", colour)

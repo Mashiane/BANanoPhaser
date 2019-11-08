@@ -102,7 +102,8 @@ Sub onCreate
 	gameScene.PhysicsAddCollider(stars, platforms)
 	'same with bomb collision
 	gameScene.PhysicsAddCollider(bombs, platforms)
-	'
+	
+	'when a player collides with a star, collect it
 	Dim star As BANanoObject
 	Dim plyr As BANanoObject
 	Dim cbCollectStar As BANanoObject = BANano.CallBack(Me, "collectStar", Array(plyr, star))
@@ -226,7 +227,7 @@ Sub onUpdate
 		gameScene.SetVelocityX(player, 0)
 		gameScene.PlayAnime(player, "turn", Null)
 	End If
-	
+	'jump
 	If gameScene.UpIsDown And gameScene.IsBodyTouchingDown(player) Then
 		gameScene.SetVelocityY(player, -330)
 	End If

@@ -207,7 +207,7 @@ Sub hitBrick(bll As BANanoObject, bick As BANanoObject)
 	Scene.DisableBody(bick, True, True)
 	Dim vx As Int = Scene.getBodyVelocityX(bll)
 	If vx = 0 Then
-		Dim randNum As Double = Scene.random
+		Dim randNum As Double = Scene.Mathrandom
 		If randNum >= 0.5 Then
 			Scene.SetBodyVelocityX(bll, 150)
 		Else
@@ -228,7 +228,7 @@ Sub hitPlayer(objBall As BANanoObject, objPlayer As BANanoObject)
 	Scene.SetVelocityY(objBall, vy)
 	'
 	Dim newXVelocity As Int = Scene.GetBodyVelocityX(objBall)
-	newXVelocity = Scene.absolute(newXVelocity)
+	newXVelocity = Scene.MathAbs(newXVelocity)
 	newXVelocity = newXVelocity + 5
 	'If the ball is to the left of the player, ensure the x velocity is negative
   	Dim bx As Int = Scene.GetX(objBall)

@@ -1,39 +1,61 @@
 ﻿AppType=JavaFX
 Build1=Default,b4j.example
 File1=ball_32_32.png
-File10=sky.png
-File11=star.png
+File10=logo.png
+File11=paddle_128_32.png
+File12=phaser.min.js
+File13=platform.png
+File14=player.png
+File15=player-particle.png
+File16=power.png
+File17=preloader-bar.png
+File18=rock.png
+File19=sky.png
 File2=bomb.png
+File20=space.png
+File21=star.png
 File3=brick1_64_32.png
 File4=brick2_64_32.png
 File5=brick3_64_32.png
-File6=dude.png
-File7=paddle_128_32.png
-File8=phaser.min.js
-File9=platform.png
+File6=collect.ogg
+File7=dude.png
+File8=enemy.png
+File9=explosion.ogg
 FileGroup1=Default Group\atari
-FileGroup10=Default Group\Images
-FileGroup11=Default Group\Images
-FileGroup2=Default Group\Images
+FileGroup10=Default Group\spacehipster
+FileGroup11=Default Group\atari
+FileGroup12=Default Group
+FileGroup13=Default Group\starcatcher
+FileGroup14=Default Group\spacehipster
+FileGroup15=Default Group\spacehipster
+FileGroup16=Default Group\spacehipster
+FileGroup17=Default Group\spacehipster
+FileGroup18=Default Group\spacehipster
+FileGroup19=Default Group\starcatcher
+FileGroup2=Default Group\starcatcher
+FileGroup20=Default Group\spacehipster
+FileGroup21=Default Group\starcatcher
 FileGroup3=Default Group\atari
 FileGroup4=Default Group\atari
 FileGroup5=Default Group\atari
-FileGroup6=Default Group\Images
-FileGroup7=Default Group
-FileGroup8=Default Group
-FileGroup9=Default Group\Images
+FileGroup6=Default Group\spacehipster
+FileGroup7=Default Group\starcatcher
+FileGroup8=Default Group\spacehipster
+FileGroup9=Default Group\spacehipster
 Group=Default Group
 Library1=jcore
 Library2=jfx
 Library3=banano
 Library4=bananopostprocessor
-Module1=pgIndex
-Module2=pgBreakOut
-Module3=BANanoPhaser
-Module4=PhaserScene
-NumberOfFiles=11
+Module1=pgSpaceHipster
+Module2=PhaserScene
+Module3=pgBreakOut
+Module4=pgIndex
+Module5=BANanoPhaser
+Module6=pgStarCatcher
+NumberOfFiles=21
 NumberOfLibraries=4
-NumberOfModules=4
+NumberOfModules=6
 Version=7.8
 @EndOfDesignText@
 #Region Project Attributes 
@@ -99,5 +121,7 @@ End Sub
 
 Sub BANano_Ready
 	'pgIndex.Init
-	pgBreakOut.init
+	'pgBreakOut.init
+	'pgSpaceHipster.Init
+	pgStarCatcher.Init
 End Sub
