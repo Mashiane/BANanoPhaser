@@ -1,0 +1,104 @@
+﻿AppType=JavaFX
+Build1=Default,b4j.example
+File1=bombs.png
+File10=pickup.wav
+File11=platform.png
+File12=play.png
+File13=plx-1.png
+File14=plx-2.png
+File15=plx-3.png
+File16=plx-4.png
+File17=plx-5.png
+File18=restart.png
+File2=death.mp3
+File3=doux.png
+File4=gameover.png
+File5=logo.png
+File6=main.css
+File7=meat.png
+File8=mort.png
+File9=music.mp3
+FileGroup1=Default Group
+FileGroup10=Default Group
+FileGroup11=Default Group
+FileGroup12=Default Group
+FileGroup13=Default Group
+FileGroup14=Default Group
+FileGroup15=Default Group
+FileGroup16=Default Group
+FileGroup17=Default Group
+FileGroup18=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=Default Group
+FileGroup5=Default Group
+FileGroup6=Default Group
+FileGroup7=Default Group
+FileGroup8=Default Group
+FileGroup9=Default Group
+Group=Default Group
+Library1=jcore
+Library2=jfx
+Library3=bananopostprocessor
+Library4=bananophaserlib
+Module1=pgDinoDash
+Module2=gameOf
+Module3=titleOf
+NumberOfFiles=18
+NumberOfLibraries=4
+NumberOfModules=3
+Version=7.8
+@EndOfDesignText@
+#Region Project Attributes 
+	#MergeLibraries: True
+	#LibraryAuthor: Anele Mashy Mbanga
+	#LibraryVersion: 0.01
+#End Region
+
+Sub Process_Globals
+	Public BANano As BANano 'ignore
+	Public AppName As String = "DinoDash"
+	Private Publish As String
+	Private BP As BANanoPostProcessor
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	'post processor
+	BP.Initialize
+	BP.RedirectOutput(File.DirApp,"log.txt")
+	Publish = "C:\laragon\www"
+	'
+	Dim Version As Long = DateTime.now
+	Dim appFile As String = $"app${Version}.js"$
+	
+	'initialize banano for first use
+	BANano.Initialize("BANano", AppName, Version)
+	BANano.HTML_NAME = "index.html"
+	BANano.Header.Title = AppName
+	BANano.JAVASCRIPT_NAME = appFile
+	BANano.TranspilerOptions.UseServiceWorker = False
+	'
+	BANano.Header.AddJavascriptFile("phaser.min.js")
+	BANano.Header.AddCSSFile("main.css")
+	
+	BANano.Build(Publish)
+	BP.OpenLog(File.DirApp, "log.txt")
+	
+	BP.PublishPath = Publish
+	BP.ShortName = AppName
+	BP.AssetsPath = BANano.ASSETS_FOLDER
+	BP.ScriptsPath = BANano.SCRIPTS_FOLDER
+	BP.StylesPath = BANano.STYLES_FOLDER
+	BP.ScriptFile = BANano.JAVASCRIPT_NAME
+	BP.Open(True)
+	ExitApplication
+End Sub
+
+'Return true to allow the default exceptions handler to handle the uncaught exception.
+Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
+	Return True
+End Sub
+
+Sub BANano_Ready
+	pgDinoDash.Init
+End Sub

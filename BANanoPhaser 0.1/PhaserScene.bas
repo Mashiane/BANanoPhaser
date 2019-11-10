@@ -5,18 +5,25 @@ Type=Class
 Version=7.8
 @EndOfDesignText@
 Sub Class_Globals
-	Public Physics As BANanoObject
-	Public Anims As BANanoObject
+	Private PhysicsInt As BANanoObject
+	Private AnimsInt As BANanoObject
 	Public Input As BANanoObject
 	Public Cursors As BANanoObject
 	Public Scene As BANanoObject
 	Private BANano As BANano
-	Public Scale As BANanoObject
+	Public ScaleInt As BANanoObject
 	Public World As BANanoObject
-	Public Load As BANanoObject
-	Public Add As BANanoObject
+	Private LoadInt As BANanoObject
+	Private AddInt As BANanoObject
 	Public Game As BANanoObject
 	Private Math As BANanoObject
+	Private Cameras As BANanoObject
+	Public Camera As PhaserCamera
+	Public Physics As PhaserPhysics
+	Public Scale As PhaserScale
+	Public Anims As PhaserAnims
+	Public Load As PhaserLoad
+	Public Add As PhaserAdd
 End Sub
 
 'Initializes the scene
@@ -25,6 +32,13 @@ Public Sub Initialize(sceneName As String)
 	Scene.Initialize2("Phaser.Scene", Array(sceneName))
 	'
 	SetOnInit(Me, "getScene")
+End Sub
+
+'convert bananoobject to phaserobject
+Sub ToPhaserObject(bo As BANanoObject) As PhaserObject
+	Dim po As PhaserObject
+	po.Initialize(Scene, bo)
+	Return po
 End Sub
 
 Sub MathRandom() As Double
@@ -43,14 +57,15 @@ Sub MathMax(v1 As Int, v2 As Int) As Int
 End Sub
 
 private Sub GetScene
-	Load = Scene.GetField("load")
+	LoadInt = Scene.GetField("load")
 	Add = Scene.GetField("add")
-	Physics = Scene.GetField("physics")
-	Anims = Scene.GetField("anims")
+	PhysicsInt = Scene.GetField("physics")
+	AnimsInt = Scene.GetField("anims")
 	Input = Scene.GetField("input")
-	Scale = Scene.GetField("scale")
-	World = Physics.GetField("world")
+	ScaleInt = Scene.GetField("scale")
+	World = PhysicsInt.GetField("world")
 	Game = Scene.GetField("game")
+	Cameras = Scene.GetField("cameras")
 	Log("*scene")
 	Log(Scene)
 	Log("*game")
@@ -58,29 +73,36 @@ private Sub GetScene
 	Log("*add")
 	Log(Add)
 	'Log(World)
+	'initialize cameras.Main
+	Camera.Initialize(Scene,Cameras)
+	'initialize the physics class
+	Physics.Initialize(Scene, PhysicsInt)
+	Scale.Initialize(Scene, ScaleInt)
+	Anims.Initialize(Scene, AnimsInt)
+	Load.Initialize(Scene, LoadInt)
 End Sub
 
-Sub ConfigGetHeight As Int
+Sub configGetHeight As Int
 	Dim rs As Int = Game.GetField("config").GetField("height").Result
 	Return rs
 End Sub
 
-Sub ConfigGetWidth As Int
+Sub configGetWidth As Int
 	Dim rs As Int = Game.GetField("config").GetField("width").Result
 	Return rs
 End Sub
 
-
-Sub GetBodyY(obj As BANanoObject) As Int
+'DEPRACATED use PhaserObject.bodyGetY
+Sub getBodyY(obj As BANanoObject) As Int
 	Dim y As Int = obj.GetField("body").GetField("y").Result
 	Return y
 End Sub
 
-Sub GetBodyX(obj As BANanoObject) As Int
+'DEPRACATED use PhaserObject.bodyGetX
+Sub getBodyX(obj As BANanoObject) As Int
 	Dim x As Int = obj.GetField("body").GetField("x").Result
 	Return x
 End Sub
-
 
 Sub getPhysicsWorldBoundsWidth As Int
 	Dim dbl As Int = World.GetField("bounds").GetField("width").result
@@ -92,21 +114,21 @@ Sub getPhysicsWorldBoundsHeight As Int
 	Return dbl
 End Sub
 
-Sub SetVisible(obj As BANanoObject, b As Boolean)
+Sub setVisible(obj As BANanoObject, b As Boolean)
 	obj.RunMethod("setVisible", Array(b))
 End Sub
 
 'anchor an object
-Sub SetOriginXY(obj As BANanoObject, originX As Double, originY As Double)
+Sub setOriginXY(obj As BANanoObject, originX As Double, originY As Double)
 	obj.RunMethod("setOrigin", Array(originX, originY))
 End Sub
 
 'anchor an object
-Sub SetOrigin(obj As BANanoObject, originX As Double)
+Sub setOrigin(obj As BANanoObject, originX As Double)
 	obj.RunMethod("setOrigin", Array(originX))
 End Sub
 
-Sub SetImmovable(obj As BANanoObject, b As Boolean)
+Sub setImmovable(obj As BANanoObject, b As Boolean)
 	obj.RunMethod("setImmovable", Array(b))
 End Sub
 
@@ -124,45 +146,45 @@ Sub getPhysicsWorldBoundsCenterY As Double
 	Return h
 End Sub
 
-Sub SetScaleMode(scaleMode As Int)
-	Scale.SetField("scaleMode", scaleMode)
+Sub setScaleMode(scaleMode As Int)
+	ScaleInt.SetField("scaleMode", scaleMode)
 End Sub
 
 
 Sub ScaleSetScaleMode(scaleMode As Int)
-	Scale.SetField("scaleMode", scaleMode)
+	ScaleInt.SetField("scaleMode", scaleMode)
 End Sub
 
 Sub SetScalePageAlignHorizontally(b As Boolean)
-	Scale.SetField("pageAlignHorizontally", b)
+	ScaleInt.SetField("pageAlignHorizontally", b)
 End Sub
 
 Sub SetScalePageAlignVertically(b As Boolean)
-	Scale.SetField("pageAlignVertically", b)
+	ScaleInt.SetField("pageAlignVertically", b)
 End Sub
 
 Sub ScaleSetPageAlignVertically(b As Boolean)
-	Scale.SetField("pageAlignVertically", b)
+	ScaleInt.SetField("pageAlignVertically", b)
 End Sub
 
 Sub ScaleSetPageAlignHorizontally(b As Boolean)
-	Scale.SetField("pageAlignHorizontally", b)
+	ScaleInt.SetField("pageAlignHorizontally", b)
 End Sub
 
 Sub ScaleSetMinWidth(v As Int)
-	Scale.SetField("minWidth", v)
+	ScaleInt.SetField("minWidth", v)
 End Sub
 
 Sub ScaleSetMinHeight(v As Int)
-	Scale.SetField("minHeight", v)
+	ScaleInt.SetField("minHeight", v)
 End Sub
 
 Sub ScaleSetMaxHeight(v As Int)
-	Scale.SetField("maxHeight", v)
+	ScaleInt.SetField("maxHeight", v)
 End Sub
 
 Sub ScaleSetMaxWidth(v As Int)
-	Scale.SetField("maxWidth", v)
+	ScaleInt.SetField("maxWidth", v)
 End Sub
 
 Sub setTilePositionX(obj As BANanoObject, x As Int)
@@ -315,13 +337,13 @@ Sub SetScale(bo As BANanoObject, vScale As Object)
 End Sub
 
 Sub SetScaleX(bo As BANanoObject, x As Double)
-	Dim Scale As BANanoObject = bo.GetField("scale")
-	Scale.SetField("x", x)
+	Dim sScale As BANanoObject = bo.GetField("scale")
+	sScale.SetField("x", x)
 End Sub
 
 Sub SetScaleY(bo As BANanoObject, y As Double)
-	Dim Scale As BANanoObject = bo.GetField("scale")
-	Scale.SetField("y", y)
+	Dim sScale As BANanoObject = bo.GetField("scale")
+	sScale.SetField("y", y)
 End Sub
 
 Sub RefreshBody(bo As BANanoObject)
@@ -452,7 +474,7 @@ Sub CreateAnime(key As String, spriteName As String, frameRate As Int, startFram
 		anime.Put("frames", bframes)
 	End If
 	'
-	Anims.RunMethod("create", anime)
+	AnimsInt.RunMethod("create", anime)
 End Sub
 
 
@@ -464,7 +486,7 @@ private Sub GenerateFrameNumbers(spriteName As String, startFrame As Int, endFra
 	Dim options As Map = CreateMap()
 	options.Put("start", startFrame)
 	options.Put("end", endFrame)
-	Dim bo As BANanoObject = Anims.RunMethod("generateFrameNumbers", Array(spriteName, options))
+	Dim bo As BANanoObject = AnimsInt.RunMethod("generateFrameNumbers", Array(spriteName, options))
 	Return bo
 End Sub
 
@@ -520,18 +542,18 @@ End Sub
 
 Sub SceneAddSprite(x As Int, y As Int, key As String) As BANanoObject
 	'game.add.sprite(0,0,“bg”);
-	Dim bo As BANanoObject = Add.RunMethod("sprite", Array(x, y, key))
+	Dim bo As BANanoObject = AddInt.RunMethod("sprite", Array(x, y, key))
 	Return bo
 End Sub
 
 Sub AddTileSprite(x As Int, y As Int, width As Int, height As Int, key As String) As BANanoObject
-	Dim bo As BANanoObject = Add.RunMethod("tileSprite", Array(x, y, width, height, key))
+	Dim bo As BANanoObject = AddInt.RunMethod("tileSprite", Array(x, y, width, height, key))
 	Return bo
 End Sub
 
 Sub AddSprite(x As Int, y As Int, key As String) As BANanoObject
 	'game.add.sprite(0,0,“bg”);
-	Dim bo As BANanoObject = Add.RunMethod("sprite", Array(x, y, key))
+	Dim bo As BANanoObject = AddInt.RunMethod("sprite", Array(x, y, key))
 	Return bo
 End Sub
 
@@ -542,48 +564,55 @@ End Sub
 
 Sub SceneAddParticles(key As String) As BANanoObject
 	'var particles = this.add.particles('red');
-	Dim bo As BANanoObject = Add.RunMethod("particles", Array(key))
+	Dim bo As BANanoObject = AddInt.RunMethod("particles", Array(key))
 	Return bo
 End Sub
 
 Sub AddParticles(key As String) As BANanoObject
 	'var particles = this.add.particles('red');
-	Dim bo As BANanoObject = Add.RunMethod("particles", Array(key))
+	Dim bo As BANanoObject = AddInt.RunMethod("particles", Array(key))
 	Return bo
 End Sub
 
 Sub AddImage(x As Int, y As Int, key As String) As BANanoObject
 	'this.add.image(400, 300, 'sky');
-	Dim bo As BANanoObject = Add.RunMethod("image", Array(x, y, key))
+	Dim bo As BANanoObject = AddInt.RunMethod("image", Array(x, y, key))
 	Return bo
 End Sub
 
+Sub AddGaphics() As PhaserObject
+	'this.add.graphics()
+	Dim bo As BANanoObject = AddInt.RunMethod("graphics", Null)
+	Dim po As PhaserObject
+	po.Initialize(Scene, bo)
+	Return po
+End Sub
 
 Sub SceneAddImage(x As Int, y As Int, key As String) As BANanoObject
 	'this.add.image(400, 300, 'sky');
-	Dim bo As BANanoObject = Add.RunMethod("image", Array(x, y, key))
+	Dim bo As BANanoObject = AddInt.RunMethod("image", Array(x, y, key))
 	Return bo
 End Sub
 
 Sub AddSound(key As String) As BANanoObject
-	Dim bo As BANanoObject = Add.RunMethod("sound", Array(key))
+	Dim bo As BANanoObject = AddInt.RunMethod("sound", Array(key))
 	Return bo
 End Sub
 
 Sub SceneAddSound(key As String) As BANanoObject
-	Dim bo As BANanoObject = Add.RunMethod("sound", Array(key))
+	Dim bo As BANanoObject = AddInt.RunMethod("sound", Array(key))
 	Return bo
 End Sub
 
 Sub SceneAddText(x As Int, y As Int, text As String, options As Map) As BANanoObject
 	'scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-	Dim bo As BANanoObject = Add.RunMethod("text", Array(x, y, text, options))
+	Dim bo As BANanoObject = AddInt.RunMethod("text", Array(x, y, text, options))
 	Return bo
 End Sub
 
 Sub AddText(x As Int, y As Int, text As String, options As Map) As BANanoObject
 	'scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-	Dim bo As BANanoObject = Add.RunMethod("text", Array(x, y, text, options))
+	Dim bo As BANanoObject = AddInt.RunMethod("text", Array(x, y, text, options))
 	Return bo
 End Sub
 
@@ -592,7 +621,7 @@ Sub AddText1(x As Int, y As Int, text As String, fontName As String, fill As Str
 	options.Put("font", fontName)
 	If fill <> Null Then options.Put("fill", fill)
 	If align <> Null Then options.Put("align", align)
-	Dim bo As BANanoObject = Add.RunMethod("text", Array(x, y, text, options))
+	Dim bo As BANanoObject = AddInt.RunMethod("text", Array(x, y, text, options))
 	Return bo
 End Sub
 
@@ -633,38 +662,38 @@ Sub RightIsDown As Boolean
 	Return bres
 End Sub
 
-Sub PhysicsAddOverlap(obj1 As BANanoObject, obj2 As BANanoObject, obj3 As BANanoObject, obj4 As BANanoObject, obj5 As BANanoObject)
+Sub PhysicsAddOverlap(obj1 As BANanoObject, obj2 As BANanoObject, obj3 As BANanoObject, obj4 As BANanoObject)
 	'this.physics.add.overlap()
-	Physics.GetField("add").RunMethod("overlap", Array(obj1, obj2, obj3, obj4, obj5))
+	PhysicsInt.GetField("add").RunMethod("overlap", Array(obj1, obj2, obj3, obj4, PhysicsInt))
 End Sub
 
 Sub PhysicsAddCollider(obj1 As BANanoObject, obj2 As BANanoObject)
 	'this.physics.add.collider(player, platforms);
-	Physics.GetField("add").RunMethod("collider", Array(obj1, obj2))
+	PhysicsInt.GetField("add").RunMethod("collider", Array(obj1, obj2))
 End Sub
 
 Sub PhysicsAddCollider5(obj1 As BANanoObject, obj2 As BANanoObject, obj3 As BANanoObject, obj4 As BANanoObject, obj5 As BANanoObject)
 	'this.physics.add.collider(player, platforms);
-	Physics.GetField("add").RunMethod("collider", Array(obj1, obj2, obj3, obj4, obj5))
+	PhysicsInt.GetField("add").RunMethod("collider", Array(obj1, obj2, obj3, obj4, Scene))
 End Sub
 
 
 
 Sub PhysicsAddSprite(x As Int, y As Int, key As String) As BANanoObject
 	'player = this.physics.add.sprite(100, 450, 'dude');
-	Dim bo As BANanoObject = Physics.GetField("add").RunMethod("sprite", Array(x, y, key))
+	Dim bo As BANanoObject = PhysicsInt.GetField("add").RunMethod("sprite", Array(x, y, key))
 	Return bo
 End Sub
 
 Sub PhysicsAddImage(x As Int, y As Int, key As String) As BANanoObject
 	'var logo = this.physics.add.image(400, 100, 'logo');
-	Dim img As BANanoObject = Physics.GetField("add").RunMethod("image", Array(x, y, key))
+	Dim img As BANanoObject = PhysicsInt.GetField("add").RunMethod("image", Array(x, y, key))
 	Return img
 End Sub
 
 Sub PhysicsAddStaticGroup As BANanoObject
 	'platforms = this.physics.add.staticGroup();
-	Dim bo As BANanoObject = Physics.GetField("add").RunMethod("staticGroup", Null)
+	Dim bo As BANanoObject = PhysicsInt.GetField("add").RunMethod("staticGroup", Null)
 	Return bo
 End Sub
 
@@ -681,7 +710,7 @@ Sub PhysicsAddGroup(key As String, irepeat As String, x As Int, y As Int, stepX 
 	options.Put("immovable", immovable)
 	options.Put("setXY", setxy)
 	
-	Dim bo As BANanoObject = Physics.GetField("add").RunMethod("group", options)
+	Dim bo As BANanoObject = PhysicsInt.GetField("add").RunMethod("group", options)
 	Return bo
 End Sub
 
@@ -690,16 +719,15 @@ Sub AutoScroll(obj As BANanoObject, x As Int, y As Int)
 End Sub	
 
 Sub PhysicsPause() As BANanoObject
-	Physics.RunMethod("pause", Null)
+	PhysicsInt.RunMethod("pause", Null)
 End Sub
 
 Sub PhysicsResume() As BANanoObject
-	Physics.RunMethod("resume", Null)
+	PhysicsInt.RunMethod("resume", Null)
 End Sub
-
 
 Sub PhysicsAddGroup1() As BANanoObject
 	'platforms = this.physics.add.group();
-	Dim bo As BANanoObject = Physics.GetField("add").RunMethod("group", Null)
+	Dim bo As BANanoObject = PhysicsInt.GetField("add").RunMethod("group", Null)
 	Return bo
 End Sub

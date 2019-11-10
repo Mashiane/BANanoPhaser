@@ -37,7 +37,6 @@ End Sub
 'Initializes the phaser object
 Public Sub Initialize()
 	Phaser.Initialize("Phaser")
-	
 	'
 	mconfig = CreateMap()
 	mphysics = CreateMap()
@@ -68,7 +67,9 @@ Sub SetScaleAutoCenter(autoCenter As Int)
 	mscale.Put("autoCenter", autoCenter)
 End Sub
 
-
+Sub SetTitle(title As String)
+	mconfig.Put("title", title)
+End Sub
 
 Sub SetBackgroundColor(colour As String)
 	mconfig.Put("backgroundColor", colour)

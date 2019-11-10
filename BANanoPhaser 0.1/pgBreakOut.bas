@@ -1,5 +1,5 @@
 ﻿B4J=true
-Group=Default Group
+Group=Default Group\Games
 ModulesStructureVersion=1
 Type=StaticCode
 Version=7.8

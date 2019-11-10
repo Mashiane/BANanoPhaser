@@ -1,5 +1,5 @@
 ﻿B4J=true
-Group=Default Group
+Group=Default Group\Games
 ModulesStructureVersion=1
 Type=StaticCode
 Version=7.8
@@ -128,11 +128,11 @@ Sub onCreate
 	Dim star As BANanoObject
 	Dim plyr As BANanoObject
 	Dim cbCollectStar As BANanoObject = BANano.CallBack(Me, "collectStar", Array(plyr, star))
-	Scene.PhysicsAddOverlap(player, stars, cbCollectStar, Null, Scene.Physics)
+	Scene.PhysicsAddOverlap(player, stars, cbCollectStar, Null)
 	'
 	'when a player overlaps with a bomb, game over
 	Dim cbHitBomb As BANanoObject = BANano.CallBack(Me, "hitBomb", Array(plyr, star))
-	Scene.PhysicsAddOverlap(player, bombs, cbHitBomb, Null, Scene.Physics)
+	Scene.PhysicsAddOverlap(player, bombs, cbHitBomb, Null)
 End Sub
 
 Sub AddBomb
