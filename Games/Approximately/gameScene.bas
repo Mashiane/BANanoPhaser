@@ -8,7 +8,7 @@ Version=7.8
 Sub Process_Globals
 	Public Scene As PhaserScene
 	Private BANano As BANano
-	'
+	
 	Private playerBalls As PhaserObject
 	Private playerIndex As Int
 	Private separatorLine As PhaserObject
@@ -42,6 +42,7 @@ Sub onPreload
 End Sub
 
 Sub onCreate
+	'Scene.add.image(400, 300, "bg")
 	Dim width As Int = Scene.game.canvas.width
 	Dim height As Int = Scene.game.canvas.height
 	Scene.cameras.mainc.setBackgroundColor("#38B6FF")
@@ -71,11 +72,12 @@ Sub onCreate
 	checkButton = Scene.add.sprite(700, 550, "checkButton")
 	checkButton.setInteractive
 	checkButton.on("pointerdown", Me, "compareBalls", Null)
-	'
+	
 	Dim wf As PhaserWebFont
 	wf.Initialize
 	wf.AddGoogleFont("Luckiest Guy")
 	wf.SetOnLoad(Me, "reset")
+
 End Sub
 
 Sub scalePlayerBall

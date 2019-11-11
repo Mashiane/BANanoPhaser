@@ -28,22 +28,17 @@ Sub onPreload
 	progressBox = Scene.add.graphics
 	progressBox.fillStyle("0x222222", 0.8)
 	progressBox.fillRect(240, 270, 320, 50)
-	'
+            
 	Dim width As Int = Scene.cameras.mainc.width
 	Dim height As Int = Scene.cameras.mainc.height
-	'
-	Dim x As Int = width / 2
-	Dim y As Int = (height / 2) - 50
-	loadingText = Scene.make.text(x, y, "Loading...", "20px monospace", "#ffffff")
-	'loadingText.setOrigin(0.5, 0.5)
-	'
-	Dim x1 As Int = width / 2
-	Dim y1 As Int = (height / 2) - 5
-	percentText = Scene.make.text(x1, y1, "0%", "18px monospace", "#ffffff")
-	'percentText.setOrigin(0.5, 0.5)
+	loadingText = Scene.make.text(width / 2, height / 2 - 50, "Loading...", "20px monospace", "#ffffff")
+	loadingText.setOrigin(0.5, 0.5)
+	
+	percentText = Scene.make.text(width / 2, height / 2 - 5, "0%", "18px monospace", "#ffffff")
+	percentText.setOrigin(0.5, 0.5)
 	'
 	Dim value As Double
-	Dim onloadCB As BANanoObject = BANano.CallBack(Me, "onLoad", Array(value))
+	Dim onloadCB As BANanoObject = BANano.CallBack(Me, "onProgress", Array(value))
 	Scene.load.on("progress", onloadCB)
 	'
 	Dim onCompleteCB As BANanoObject = BANano.CallBack(Me, "onComplete", Null)
@@ -64,7 +59,7 @@ Sub onPreload
 	Scene.load.script("webfont", "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
 End Sub
 
-Sub onLoad(value As Double)
+Sub onProgress(value As Double)
 	Dim perc As String = Scene.Percentage(value)
 	Dim strVal As String = Scene.Cstr(perc) & "%"
 	percentText.setText(strVal)
