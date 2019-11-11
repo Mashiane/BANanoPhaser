@@ -178,7 +178,7 @@ Sub SetVelocity(x As Double, y As Double) As PhaserObject
 End Sub
 
 Sub SetCollideWorldBounds(b As Boolean) As PhaserObject
-	Thing.setfield("collideWorldBounds", b)
+	Thing.RunMethod("setCollideWorldBounds", Array(b))
 	Return Me
 End Sub
 
