@@ -40,7 +40,7 @@ Sub Stop As PhaserObject
 	Return Me
 End Sub
 
-Sub CreateEmitter(particles As BANanoObject, speed As Int, scaleStart As Int, scaleEnd As Int, blendMode As String) As BANanoObject
+Sub CreateEmitter(speed As Int, scaleStart As Int, scaleEnd As Int, blendMode As String) As BANanoObject
 	Dim vscale As Map = CreateMap("start":scaleStart, "end":scaleEnd)
 	'
 	Dim options As Map = CreateMap()
@@ -48,8 +48,13 @@ Sub CreateEmitter(particles As BANanoObject, speed As Int, scaleStart As Int, sc
 	options.Put("scale", vscale)
 	options.Put("blendMode", blendMode)
 	'
-	Dim emitter As BANanoObject = particles.RunMethod("createEmitter", options)
+	Dim emitter As BANanoObject = Thing.RunMethod("createEmitter", options)
 	Return emitter
+End Sub
+
+Sub startFollow(target As PhaserObject) As PhaserObject
+	Thing.RunMethod("startFollow", Array(target.thing))
+	Return Me
 End Sub
 
 Sub GetChildren As List
@@ -336,6 +341,11 @@ End Sub
 
 Sub RefreshBody As PhaserObject
 	Thing.RunMethod("refreshBody", Null)
+	Return Me
+End Sub
+
+Sub SetBounceXY(X As Double, Y As Double) As PhaserObject
+	Thing.RunMethod("setBounce", Array(x, y))
 	Return Me
 End Sub
 
