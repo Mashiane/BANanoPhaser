@@ -29,3 +29,10 @@ Sub addEvent(delay As Double, module As Object, methodName As String, callbackSc
 	pe.Initialize(Scene, bo)
 	Return pe
 End Sub
+
+Sub events As PhaserEvents
+	Dim eve As BANanoObject = Time.GetField("events")
+	Dim po As PhaserEvents
+	po.Initialize(Scene, eve)
+	Return po 
+End Sub

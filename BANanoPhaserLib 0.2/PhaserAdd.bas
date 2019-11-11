@@ -26,9 +26,12 @@ Sub ToPhaserObject(bo As BANanoObject) As PhaserObject
 End Sub
 
 'add a collider between 1 objects
-Sub collider(obj1 As PhaserObject, obj2 As PhaserObject)
+Sub collider(obj1 As PhaserObject, obj2 As PhaserObject) As PhaserObject
 	'this.physics.add.collider(player, platforms);
-	Add.RunMethod("collider", Array(obj1.Thing, obj2.Thing))
+	Dim bo As BANanoObject = Add.RunMethod("collider", Array(obj1.Thing, obj2.Thing))
+	Dim po As PhaserObject
+	po.Initialize(Scene, bo)
+	Return po 
 End Sub
 
 Sub sprite(x As Int, y As Int, key As String) As PhaserObject
@@ -47,20 +50,9 @@ Sub group As PhaserObject
 	Return po
 End Sub
 
-'add a group with options
-Sub group1(key As String, irepeat As String, x As Int, y As Int, stepX As Int, immovable As Boolean) As PhaserObject
-	'platforms = this.physics.add.group();
-	Dim setxy As Map = CreateMap()
-	setxy.Put("x", x)
-	setxy.Put("y", y)
-	setxy.Put("stepX", stepX)
-	'
-	Dim options As Map = CreateMap()
-	options.Put("key", key)
-	options.Put("repeat", irepeat)
-	options.Put("immovable", immovable)
-	options.Put("setXY", setxy)
-	
+'add group using PhaserGroup
+Sub group1(pg As PhaserGroup) As PhaserObject
+	Dim options As Map = pg.ToMap
 	Dim bo As BANanoObject = Add.RunMethod("group", options)
 	Dim po As PhaserObject
 	po.Initialize(Scene, bo)

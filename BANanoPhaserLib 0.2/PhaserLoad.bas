@@ -32,3 +32,12 @@ Sub spritesheet(key As String, URL As String, frameWidth As Double, frameHeight 
 	options.Put("frameHeight", frameHeight)
 	Load.RunMethod("spritesheet", Array(key, URL, options))
 End Sub
+
+Sub on(event As String, eventCallBack As BANanoObject)
+	'on('progress', function (value: number)
+	Load.RunMethod("on", Array(event, eventCallBack))
+End Sub
+
+Sub script(key As String, URL As String)
+  	Load.RunMethod("script", Array(key, URL))
+End Sub

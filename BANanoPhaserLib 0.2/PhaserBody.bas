@@ -20,6 +20,10 @@ Sub touchingdown As Boolean
 	Return td
 End Sub
 
+Sub SetAllowGravity(b As Boolean)
+	bodY.RunMethod("setAllowGravity", Array(b))
+End Sub
+
 Sub getY As Int
 	Dim y As Int = bodY.GetField("y").Result
 	Return y

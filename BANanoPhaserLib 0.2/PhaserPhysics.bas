@@ -11,6 +11,13 @@ Sub Class_Globals
 	Public Add As PhaserAdd
 End Sub
 
+Sub world As PhaserWorld
+	Dim bo As BANanoObject = Physics.GetField("world")
+	Dim pw As PhaserWorld
+	pw.Initialize(Scene, bo)
+	Return pw
+End Sub
+
 'Initializes the physics
 Public Sub Initialize(Scne As BANanoObject, obj As BANanoObject) As PhaserPhysics
 	Physics = obj

@@ -45,8 +45,6 @@ Sub onCreate
 	background4 = TitleScene.add.tileSprite(400, 300, 800, 600, "background4")
 	background5 = TitleScene.add.tileSprite(400, 300, 800, 600, "background5")
 	
-	TitleScene.Add.
-	
 	'add a platform
 	ground = TitleScene.add.tileSprite(400, 568, 800, 100, "platform")
 	TitleScene.physics.add.existing(ground)

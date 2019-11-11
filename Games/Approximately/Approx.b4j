@@ -1,33 +1,19 @@
 ﻿AppType=JavaFX
 Build1=Default,b4j.example
-File1=bombs.png
-File10=pickup.wav
-File11=platform.png
-File12=play.png
-File13=plx-1.png
-File14=plx-2.png
-File15=plx-3.png
-File16=plx-4.png
-File17=plx-5.png
-File18=restart.png
-File2=death.mp3
-File3=doux.png
-File4=gameover.png
-File5=logo.png
-File6=main.css
-File7=meat.png
-File8=mort.png
-File9=music.mp3
+File1=addButton.png
+File10=retryButton.png
+File11=separator.png
+File2=checkButton.png
+File3=CoverImage.png
+File4=disabledAddButton.png
+File5=disabledGrowButton.png
+File6=growButton.png
+File7=guessBall.png
+File8=nextButton.png
+File9=playerBall.png
 FileGroup1=Default Group
 FileGroup10=Default Group
 FileGroup11=Default Group
-FileGroup12=Default Group
-FileGroup13=Default Group
-FileGroup14=Default Group
-FileGroup15=Default Group
-FileGroup16=Default Group
-FileGroup17=Default Group
-FileGroup18=Default Group
 FileGroup2=Default Group
 FileGroup3=Default Group
 FileGroup4=Default Group
@@ -39,25 +25,24 @@ FileGroup9=Default Group
 Group=Default Group
 Library1=jcore
 Library2=jfx
-Library3=bananopostprocessor
-Library4=bananophaserlib
-Module1=gameOf
-Module2=pgDinoDash
-Module3=titleOf
-NumberOfFiles=18
-NumberOfLibraries=4
+Library3=banano
+Library4=bananopostprocessor
+Library5=bananophaserlib
+Module1=pgIndex
+Module2=preloadScene
+Module3=gameScene
+NumberOfFiles=11
+NumberOfLibraries=5
 NumberOfModules=3
 Version=7.8
 @EndOfDesignText@
 #Region Project Attributes 
 	#MergeLibraries: True
-	#LibraryAuthor: Anele Mashy Mbanga
-	#LibraryVersion: 0.01
 #End Region
 
 Sub Process_Globals
 	Public BANano As BANano 'ignore
-	Public AppName As String = "DinoDash"
+	Public AppName As String = "Skeleton"
 	Private Publish As String
 	Private BP As BANanoPostProcessor
 End Sub
@@ -79,7 +64,7 @@ Sub AppStart (Form1 As Form, Args() As String)
 	BANano.TranspilerOptions.UseServiceWorker = False
 	'
 	BANano.Header.AddJavascriptFile("phaser.min.js")
-	BANano.Header.AddCSSFile("main.css")
+	'BANano.Header.AddJavascriptFile("https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
 	
 	BANano.Build(Publish)
 	BP.OpenLog(File.DirApp, "log.txt")
@@ -100,5 +85,5 @@ Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
 End Sub
 
 Sub BANano_Ready
-	pgDinoDash.Init
+	pgIndex.Init
 End Sub

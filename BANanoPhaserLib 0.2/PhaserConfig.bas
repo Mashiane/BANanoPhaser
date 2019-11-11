@@ -14,6 +14,8 @@ Sub Class_Globals
 	Public typeOf As Object
 	Public scale As ConfigScale
 	Public physics As ConfigPhysics
+	Public autoFocus As Boolean
+	Public render As ConfigRender
 End Sub
 
 'Initializes the object. You can add parameters to this method if needed.
@@ -25,14 +27,17 @@ Public Sub Initialize
 	width = -1
 	height = -1
 	typeOf = Null
+	autoFocus = False
 	scale.Initialize 	
 	physics.Initialize
 	physics.arcade.Initialize 
 	physics.arcade.gravity.Initialize   
+	render.Initialize 
 End Sub
 
 'refresh the configuration
 Sub Refresh(m As Map)
+	If autoFocus Then m.Put("autoFocus", True)
 	If title <> "" Then m.Put("title", title)
 	If backgroundColor <> "" Then m.Put("backgroundColor", backgroundColor)
 	If pixelArt Then m.Put("pixelArt", pixelArt)
@@ -55,4 +60,9 @@ Sub Refresh(m As Map)
 	mphysics.Put("arcade", marcade)
 	If physics.defaultt <> "" Then mphysics.Put("default", physics.defaultt)
 	m.Put("physics", mphysics)
+	'
+	Dim mrender As Map = CreateMap()
+	mrender.Put("antialias", render.antialias)
+	mrender.Put("transparent", render.transparent)
+	m.Put("render", mrender)
 End Sub

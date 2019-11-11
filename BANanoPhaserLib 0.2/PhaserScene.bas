@@ -6,19 +6,19 @@ Version=7.8
 @EndOfDesignText@
 #IgnoreWarnings:12
 Sub Class_Globals
+	Private MakeInt As BANanoObject
 	Private TimeInt As BANanoObject
 	Private SoundInt As BANanoObject
 	Private PhysicsInt As BANanoObject
 	Private AnimsInt As BANanoObject
-	Public Input As BANanoObject
+	Public InputInt As BANanoObject
 	Public Cursors As BANanoObject
 	Public Scene As BANanoObject
 	Private BANano As BANano  'ignore
 	Public ScaleInt As BANanoObject
-	Public World As BANanoObject
 	Private LoadInt As BANanoObject
 	Private AddInt As BANanoObject
-	Public Game As BANanoObject
+	Private GameInt As BANanoObject
 	Private Math As BANanoObject
 	Private CamerasInt As BANanoObject
 	Public Cameras As PhaserCameras
@@ -30,10 +30,15 @@ Sub Class_Globals
 	Public Sound As PhaserSound
 	Public Time As PhaserTime
 	Private Phaser As BANanoObject
+	Public Make As PhaserMake
+	Public Input As PhaserInput
+	Public Game As PhaserGame
+	Public Name As String
 End Sub
 
 'Initializes the scene
 Public Sub Initialize(sceneName As String)
+	Name = sceneName
 	Phaser.Initialize("Phaser")
 	Math.Initialize("Math")
 	Scene.Initialize2("Phaser.Scene", Array(sceneName))
@@ -68,6 +73,10 @@ Sub MathMax(v1 As Int, v2 As Int) As Int
 	Return r
 End Sub
 
+Sub MathRound(valOf As Double) As Double
+	Dim r As Double = Math.RunMethod("round", Array(valOf))
+	Return r
+End Sub
 
 Sub MathFloatBetween(dFrom As Double, dTo As Double) As Double
 	'Phaser.Math.FloatBetween(0.4, 0.8)
@@ -85,13 +94,13 @@ private Sub GetScene
 	AddInt = Scene.GetField("add")
 	PhysicsInt = Scene.GetField("physics")
 	AnimsInt = Scene.GetField("anims")
-	Input = Scene.GetField("input")
+	InputInt = Scene.GetField("input")
 	ScaleInt = Scene.GetField("scale")
-	World = PhysicsInt.GetField("world")
-	Game = Scene.GetField("game")
+	GameInt = Scene.GetField("game")
 	CamerasInt = Scene.GetField("cameras")
 	SoundInt = Scene.GetField("sound")
 	TimeInt = Scene.GetField("time")
+	MakeInt = Scene.GetField("make")
 	Log(Scene)
 	'initialize cameras.Main
 	Cameras.Initialize(Scene,CamerasInt)
@@ -103,53 +112,40 @@ private Sub GetScene
 	Add.Initialize(Scene, AddInt)
 	Sound.Initialize(Scene, SoundInt)
 	Time.Initialize(Scene, TimeInt)
+	Make.Initialize(Scene, MakeInt)
+	Input.Initialize(Scene, InputInt)
+	Game.Initialize(Scene, GameInt) 
 End Sub
 
-Sub configGetHeight As Int
-	Dim rs As Int = Game.GetField("config").GetField("height").Result
+Sub getConfigHeight As Int
+	Dim rs As Int = GameInt.GetField("config").GetField("height").Result
 	Return rs
 End Sub
 
-Sub configGetWidth As Int
-	Dim rs As Int = Game.GetField("config").GetField("width").Result
+Sub getConfigWidth As Int
+	Dim rs As Int = GameInt.GetField("config").GetField("width").Result
 	Return rs
-End Sub
-
-Sub getPhysicsWorldBoundsWidth As Int
-	Dim dbl As Int = World.GetField("bounds").GetField("width").result
-	Return dbl
-End Sub
-
-Sub getPhysicsWorldBoundsHeight As Int
-	Dim dbl As Int = World.GetField("bounds").GetField("height").result
-	Return dbl
-End Sub
-
-Sub PhysicsWorldSetBounds(x As Int, y As Int, width As Int, height As Int)
-	World.RunMethod("setBounds", Array(x, y, width, height))
-End Sub
-
-Sub getPhysicsWorldBoundsCenterX As Double
-	Dim h As Double = World.GetField("bounds").GetField("centerX").Result
-	Return h
-End Sub
-
-Sub getPhysicsWorldBoundsCenterY As Double
-	Dim h As Double = World.GetField("bounds").GetField("centerY").Result
-	Return h
 End Sub
 
 Sub Cstr(obj As Object) As String
 	Return "" & obj
 End Sub
 
-Sub SetPhysicsWorldCheckCollisionDown(b As Boolean)
-	World.GetField("checkCollision").SetField("down", b)
+'increment a value
+Sub Incr(valueTo As Int) As Int
+	Dim res As Int = valueTo + 1
+	Return res
+End Sub
+
+'decrement a value
+Sub Decr(valueTo As Int) As Int
+	Dim res As Int = valueTo - 1
+	Return res
 End Sub
 
 'createCursorKeys
 Sub CreateCursorKeys
-	Cursors = Input.GetField("keyboard").RunMethod("createCursorKeys", Null)
+	Cursors = InputInt.GetField("keyboard").RunMethod("createCursorKeys", Null)
 End Sub
 
 'cursors.left.isDown
@@ -179,6 +175,13 @@ End Sub
 'restart the scene
 Sub restart
 	Scene.RunMethod("restart", Null)
+End Sub
+
+Sub Percentage(value As Double) As Int
+	Dim valx As Double = BANano.parseFloat(Cstr(value))
+	valx = valx * 100
+	valx = BANano.parseInt(valx)
+	Return valx
 End Sub
 
 Sub SetOnInit(module As Object, methodName As String)

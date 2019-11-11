@@ -25,15 +25,19 @@ Sub Class_Globals
 	Public const ScaleModeWIDTH_CONTROLS_HEIGHT As Int = 1
 	Public const ScaleModeNONE As Int = 0
 	'
-	Public const ScaleCenterCENTER_BOTH As Int = 1
-	Public const ScaleCenterCENTER_HORIZONTALLY As Int = 2
-	Public const ScaleCenterCENTER_VERTICALLY As Int = 3
+	Public const ScaleAutoCenterCENTER_BOTH As Int = 1
+	Public const ScaleAutoCenterCENTER_HORIZONTALLY As Int = 2
+	Public const ScaleAutoCenterCENTER_VERTICALLY As Int = 3
+	
 	Private scenes As List
 	Private Phaser As BANanoObject
 	Public config As PhaserConfig
 	Public TypeOf_WEBGL As Object
 	Public TypeOf_AUTO As Object
 	Public TypeOf_CANVAS As Object
+	'
+	public TimerSecond
+	
 End Sub
 
 'Initializes the phaser object
