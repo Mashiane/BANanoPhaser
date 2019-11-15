@@ -7,10 +7,11 @@ Library3=banano
 Library4=bananopostprocessor
 Library5=bananophaserlib
 Module1=pgIndex
-Module2=scene1
+Module2=gameScene
+Module3=preloadScene
 NumberOfFiles=0
 NumberOfLibraries=5
-NumberOfModules=2
+NumberOfModules=3
 Version=7.8
 @EndOfDesignText@
 #Region Project Attributes 

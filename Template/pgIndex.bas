@@ -17,24 +17,22 @@ Sub Init
 	'empty the element
 	body.Empty
 	'
-	CreateGame
-	'start the game
-	game.start
-End Sub
-
-'create the game configuration
-Sub CreateGame
 	game.Initialize
-	game.config.typeOf = game.TypeOf_WEBGL
+	game.config.title = "GameTitle"
+	game.config.typeOf = game.TypeOf_AUTO
+	game.config.Parent = "app"
 	game.config.Width = 800
 	game.config.Height = 600
-	game.config.Parent = "body"
-	game.config.PixelArt = True
+	game.config.scale.mode = game.ScaleModeFIT
+	game.config.scale.autoCenter = game.ScaleAutoCenterCENTER_BOTH
 	game.config.physics.defaultt = "arcade"
-	game.config.physics.arcade.gravity.Put("y",1000)
-	game.config.physics.arcade.debug = False
+	game.config.physics.arcade.gravity.Put("y",300)
 	'initialize scenes and add them to the game
-	scene1.Initialize(game)
+	preloadScene.Initialize(game)
+	gameScene.Initialize(game)
 	'add the scenes, the game starts with the top most scene
-	game.addScene(scene1.MyScene)
+	game.addScene(preloadScene.Scene)
+	game.addScene(gameScene.Scene)
+	'start the game
+	game.start
 End Sub

@@ -13,7 +13,7 @@ End Sub
 
 'the game title
 Sub Initialize(game As BANanoPhaser)
-	Scene = game.CreateScene("Scene1")
+	Scene = game.CreateScene("PreloadScene")
 	Scene.SetOnPreload(Me, "onPreLoad")
 	Scene.SetOnCreate(Me, "onCreate")
 	Scene.SetOnUpdate(Me, "onUpdate")
