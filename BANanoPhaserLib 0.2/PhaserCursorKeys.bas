@@ -15,6 +15,13 @@ Public Sub Initialize(scne As BANanoObject, cursorK As BANanoObject)
 	Cursors = cursorK
 End Sub
 
+Sub right As PhaserKey
+	Dim bo As BANanoObject = Cursors.GetField("right")
+	Dim po As PhaserKey
+	po.Initialize(Scene, bo)
+	Return po
+End Sub
+
 Sub left As PhaserKey
 	Dim bo As BANanoObject = Cursors.GetField("left")
 	Dim po As PhaserKey

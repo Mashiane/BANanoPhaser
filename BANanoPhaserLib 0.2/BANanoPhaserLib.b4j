@@ -6,45 +6,46 @@ Group=Default Group
 Library1=jcore
 Library2=jfx
 Library3=banano
-Module1=PhaserObject
-Module10=BANanoPhaser
-Module11=ConfigArcade
-Module12=PhaserConfig
-Module13=ConfigPhysics
-Module14=PhaserSound
-Module15=PhaserScale
-Module16=PhaserAnims
-Module17=PhaserLoad
-Module18=PhaserBody
-Module19=PhaserCameras
-Module2=PhaserCamera
-Module20=ConfigScale
-Module21=ConfigRender
-Module22=PhaserMake
-Module23=PhaserInput
-Module24=PhaserKeyboard
-Module25=PhaserCursorKeys
-Module26=PhaserKey
-Module27=PhaserGame
-Module28=PhaserCanvas
-Module29=PhaserWorld
+Module1=PhaserTweens
+Module10=PhaserEvent
+Module11=PhaserEvents
+Module12=BANanoPhaser
+Module13=ConfigArcade
+Module14=PhaserConfig
+Module15=ConfigPhysics
+Module16=PhaserSound
+Module17=PhaserScale
+Module18=PhaserAnims
+Module19=PhaserLoad
+Module2=PhaserObject
+Module20=PhaserBody
+Module21=PhaserCameras
+Module22=ConfigScale
+Module23=ConfigRender
+Module24=PhaserMake
+Module25=PhaserInput
+Module26=PhaserKeyboard
+Module27=PhaserKey
+Module28=PhaserGame
+Module29=PhaserCanvas
 Module3=PhaserScene
-Module30=PhaserWebFont
-Module4=PhaserAdd
-Module5=PhaserPhysics
-Module6=PhaserGroup
-Module7=PhaserTime
-Module8=PhaserEvent
-Module9=PhaserEvents
+Module30=PhaserWorld
+Module31=PhaserWebFont
+Module4=PhaserCursorKeys
+Module5=PhaserCamera
+Module6=PhaserAdd
+Module7=PhaserPhysics
+Module8=PhaserGroup
+Module9=PhaserTime
 NumberOfFiles=1
 NumberOfLibraries=3
-NumberOfModules=30
+NumberOfModules=31
 Version=7.8
 @EndOfDesignText@
 #Region Project Attributes 
 	#MergeLibraries: True
 	#LibraryAuthor: Anele Mashy Mbanga
-	#LibraryVersion: 0.02
+	#LibraryVersion: 0.03
 	#LibraryName: BANanoPhaserLib
 #End Region
 
@@ -60,7 +61,7 @@ Sub AppStart (Form1 As Form, Args() As String)
 	BANano.TranspilerOptions.UseServiceWorker = False
 	'
 	BANano.Header.AddJavascriptFile("phaser.min.js")
-	BANano.BuildAsB4XLib("0.02")
+	BANano.BuildAsB4XLib("0.03")
 	ExitApplication
 End Sub
 

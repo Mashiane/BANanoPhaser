@@ -36,8 +36,6 @@ Sub Class_Globals
 	Public TypeOf_AUTO As Object
 	Public TypeOf_CANVAS As Object
 	'
-	public TimerSecond
-	
 End Sub
 
 'Initializes the phaser object

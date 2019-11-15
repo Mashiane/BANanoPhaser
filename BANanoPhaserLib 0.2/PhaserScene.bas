@@ -34,6 +34,8 @@ Sub Class_Globals
 	Public Input As PhaserInput
 	Public Game As PhaserGame
 	Public Name As String
+	Private TweensInt As BANanoObject
+	Public Tweens As PhaserTweens
 End Sub
 
 'Initializes the scene
@@ -101,6 +103,7 @@ private Sub GetScene
 	SoundInt = Scene.GetField("sound")
 	TimeInt = Scene.GetField("time")
 	MakeInt = Scene.GetField("make")
+	TweensInt = Scene.GetField("tweens")
 	Log(Scene)
 	'initialize cameras.Main
 	Cameras.Initialize(Scene,CamerasInt)
@@ -115,6 +118,7 @@ private Sub GetScene
 	Make.Initialize(Scene, MakeInt)
 	Input.Initialize(Scene, InputInt)
 	Game.Initialize(Scene, GameInt) 
+	Tweens.Initialize(Scene, TweensInt)
 End Sub
 
 Sub getConfigHeight As Int

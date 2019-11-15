@@ -212,6 +212,7 @@ Sub getX As Int
 	Return x
 End Sub
 
+'increment the x value
 Sub IncrX(x As Int) As PhaserObject
 	Dim oldx As Int = getX
 	oldx = oldx + x
@@ -219,6 +220,7 @@ Sub IncrX(x As Int) As PhaserObject
 	Return Me
 End Sub
 
+'increment the y position
 Sub IncrY(y As Int) As PhaserObject
 	Dim oldy As Int = getY
 	oldy = oldy + y
@@ -226,6 +228,7 @@ Sub IncrY(y As Int) As PhaserObject
 	Return Me
 End Sub
 
+'decrement the x position
 Sub DecrX(x As Int) As PhaserObject
 	Dim oldx As Int = getX
 	oldx = oldx - x
@@ -233,6 +236,7 @@ Sub DecrX(x As Int) As PhaserObject
 	Return Me
 End Sub
 
+'decrement the y position
 Sub DecrY(y As Int) As PhaserObject
 	Dim oldy As Int = getY
 	oldy = oldy - y
@@ -240,22 +244,26 @@ Sub DecrY(y As Int) As PhaserObject
 	Return Me
 End Sub
 
+'set x value
 Sub setX(x As Int) As PhaserObject
 	Thing.SetField("x", x)
 	Return Me
 End Sub
 
+'set y position
 Sub setY(y As Int) As PhaserObject
 	Thing.SetField("y", y)
 	Return Me
 End Sub
 
+'set xy position
 Sub SetXY(x As Int, y As Int) As PhaserObject
 	setX(x)
 	setY(y)
 	Return Me
 End Sub
 
+'get y position
 Sub getY As Int
 	Dim y As Int = Thing.GetField("y").Result
 	Return y

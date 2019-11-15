@@ -27,6 +27,12 @@ Public Sub Initialize(Scne As BANanoObject, obj As BANanoObject) As PhaserPhysic
 	Return Me
 End Sub
 
+'detect overlap
+Sub overlap(obj1 As PhaserObject, obj2 As PhaserObject) As Boolean
+	Dim res As Boolean = Physics.RunMethod("overlap", Array(obj1.Thing, obj2.Thing)).Result
+	Return res
+End Sub
+
 'add an overlap
 Sub AddOverlap(obj1 As BANanoObject, obj2 As BANanoObject, callBackMethod As BANanoObject, obj4 As BANanoObject)
 	'this.physics.add.overlap()
