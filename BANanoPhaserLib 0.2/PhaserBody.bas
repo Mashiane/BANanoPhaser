@@ -15,6 +15,13 @@ Public Sub Initialize(scne As BANanoObject, bdy As BANanoObject) As PhaserBody
 	Return Me
 End Sub
 
+Sub touching As PhaserTouching
+	Dim bo As BANanoObject = bodY.GetField("touching")
+	Dim po As PhaserTouching
+	po.Initialize(Scene, bo)
+	Return po
+End Sub
+
 Sub touchingdown As Boolean
 	Dim td As Boolean = bodY.GetField("touching").GetField("down").Result
 	Return td

@@ -20,6 +20,13 @@ Public Sub Initialize(scne As BANanoObject, obj As BANanoObject) As PhaserObject
 	Return Me
 End Sub
 
+Sub children As PhaserChildren
+	Dim bo As BANanoObject = Thing.GetField("children")
+	Dim po As PhaserChildren
+	po.Initialize(Scene, bo)
+	Return po 
+End Sub
+
 Sub SetLoop(b As Boolean) As PhaserObject
 	Thing.RunMethod("setLoop", Array(b))
 	Return Me
@@ -301,7 +308,7 @@ Sub create(x As Int, y As Int, key As String) As BANanoObject
 	Return bo
 End Sub
 
-Sub AllowGravity(b As Boolean) As PhaserObject
+Sub setAllowGravity(b As Boolean) As PhaserObject
 	Thing.SetField("allowGravity", Array(b))
 	Return Me
 End Sub

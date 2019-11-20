@@ -48,6 +48,14 @@ Public Sub Initialize(sceneName As String)
 	SetOnInit(Me, "getScene")
 End Sub
 
+'create a phaser group
+Sub CreateGroup(key As String) As PhaserGroup
+	Dim po As PhaserGroup
+	po.Initialize
+	po.key = key
+	Return po
+End Sub
+
 'start this scene
 Sub Start(NameOf As String)
 	Scene.GetField("scene").RunMethod("start", Array(NameOf))
@@ -84,6 +92,19 @@ Sub MathFloatBetween(dFrom As Double, dTo As Double) As Double
 	'Phaser.Math.FloatBetween(0.4, 0.8)
 	Dim dRes As Double = Phaser.GetField("Math").RunMethod("FloatBetween", Array(dFrom, dTo)).result
 	Return dRes
+End Sub
+
+Sub CreateAnimation(key As String) As PhaserAnimation
+	Dim anime As PhaserAnimation
+	anime.Initialize(Scene,AnimsInt)
+	anime.key = key
+	Return anime
+End Sub
+
+Sub CreateFrame(key As String) As PhaserFrame
+	Dim pf As PhaserFrame
+	pf.Initialize(Scene, key)
+	Return pf
 End Sub
 
 Sub MathBetween(dFrom As Int, dTo As Int) As Int

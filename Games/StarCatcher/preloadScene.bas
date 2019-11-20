@@ -13,7 +13,7 @@ End Sub
 
 'the game title
 Sub Initialize(game As BANanoPhaser)
-	Scene = game.CreateScene("Scene1")
+	Scene = game.CreateScene("PreloadScene")
 	Scene.SetOnPreload(Me, "onPreLoad")
 	Scene.SetOnCreate(Me, "onCreate")
 	Scene.SetOnUpdate(Me, "onUpdate")
@@ -26,6 +26,13 @@ Sub onPreload
 	'
 	Dim onCompleteCB As BANanoObject = BANano.CallBack(Me, "onComplete", Null)
 	Scene.load.on("complete", onCompleteCB)
+	
+	'load needed resources
+	Scene.load.image("sky", "./assets/sky.png")
+	Scene.load.image("ground", "./assets/platform.png")
+	Scene.load.image("star", "./assets/star.png")
+	Scene.load.image("bomb", "./assets/bomb.png")
+	Scene.load.spritesheet("dude", "./assets/dude.png", 32, 48)
 End Sub
 
 Sub onCreate

@@ -52,7 +52,7 @@ End Sub
 
 'add group using PhaserGroup
 Sub group1(pg As PhaserGroup) As PhaserObject
-	Dim options As Map = pg.ToMap
+	Dim options As Map = pg.ToObject
 	Dim bo As BANanoObject = Add.RunMethod("group", options)
 	Dim po As PhaserObject
 	po.Initialize(Scene, bo)

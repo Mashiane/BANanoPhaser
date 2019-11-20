@@ -6,46 +6,50 @@ Group=Default Group
 Library1=jcore
 Library2=jfx
 Library3=banano
-Module1=PhaserTweens
-Module10=PhaserEvent
-Module11=PhaserEvents
-Module12=BANanoPhaser
-Module13=ConfigArcade
-Module14=PhaserConfig
-Module15=ConfigPhysics
-Module16=PhaserSound
-Module17=PhaserScale
-Module18=PhaserAnims
-Module19=PhaserLoad
-Module2=PhaserObject
-Module20=PhaserBody
-Module21=PhaserCameras
-Module22=ConfigScale
-Module23=ConfigRender
-Module24=PhaserMake
-Module25=PhaserInput
-Module26=PhaserKeyboard
-Module27=PhaserKey
-Module28=PhaserGame
-Module29=PhaserCanvas
-Module3=PhaserScene
-Module30=PhaserWorld
-Module31=PhaserWebFont
-Module4=PhaserCursorKeys
-Module5=PhaserCamera
-Module6=PhaserAdd
-Module7=PhaserPhysics
-Module8=PhaserGroup
-Module9=PhaserTime
+Module1=PhaserAnims
+Module10=PhaserTweens
+Module11=PhaserCursorKeys
+Module12=PhaserAdd
+Module13=PhaserPhysics
+Module14=PhaserGroup
+Module15=PhaserTime
+Module16=PhaserEvent
+Module17=PhaserEvents
+Module18=BANanoPhaser
+Module19=ConfigArcade
+Module2=PhaserBody
+Module20=PhaserConfig
+Module21=ConfigPhysics
+Module22=PhaserSound
+Module23=PhaserScale
+Module24=PhaserLoad
+Module25=PhaserCameras
+Module26=ConfigScale
+Module27=ConfigRender
+Module28=PhaserMake
+Module29=PhaserInput
+Module3=PhaserCamera
+Module30=PhaserKeyboard
+Module31=PhaserKey
+Module32=PhaserGame
+Module33=PhaserCanvas
+Module34=PhaserWorld
+Module35=PhaserWebFont
+Module4=PhaserTouching
+Module5=PhaserScene
+Module6=PhaserChildren
+Module7=PhaserObject
+Module8=PhaserAnimation
+Module9=PhaserFrame
 NumberOfFiles=1
 NumberOfLibraries=3
-NumberOfModules=31
+NumberOfModules=35
 Version=7.8
 @EndOfDesignText@
 #Region Project Attributes 
 	#MergeLibraries: True
 	#LibraryAuthor: Anele Mashy Mbanga
-	#LibraryVersion: 0.03
+	#LibraryVersion: 0.04
 	#LibraryName: BANanoPhaserLib
 #End Region
 
@@ -61,7 +65,7 @@ Sub AppStart (Form1 As Form, Args() As String)
 	BANano.TranspilerOptions.UseServiceWorker = False
 	'
 	BANano.Header.AddJavascriptFile("phaser.min.js")
-	BANano.BuildAsB4XLib("0.03")
+	BANano.BuildAsB4XLib("0.04")
 	ExitApplication
 End Sub
 

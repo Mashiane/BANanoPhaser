@@ -37,14 +37,21 @@ Sub Create(key As String, spriteName As String, frameRate As Int, startFrame As 
 		lframes.Initialize2(Array(options))
 		anime.Put("frames", lframes)
 	Else
-		Dim bframes As BANanoObject = GenerateFrameNumbers(spriteName, startFrame, endFrame)
+		Dim bframes As BANanoObject = generateFrameNumbers(spriteName, startFrame, endFrame)
 		anime.Put("frames", bframes)
 	End If
 	'
 	Anims.RunMethod("create", anime)
 End Sub
 
-private Sub GenerateFrameNumbers(spriteName As String, startFrame As Int, endFrame As Int) As BANanoObject
+'create an animation using phaseranimation
+Sub create1(anime As PhaserAnimation)
+	Dim opt As Map = anime.ToObject
+	Anims.RunMethod("create", opt)
+End Sub
+
+'generate frame numbers
+Sub generateFrameNumbers(spriteName As String, startFrame As Int, endFrame As Int) As BANanoObject
 	Dim options As Map = CreateMap()
 	options.Put("start", startFrame)
 	options.Put("end", endFrame)
